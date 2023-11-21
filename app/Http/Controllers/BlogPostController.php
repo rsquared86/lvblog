@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogComments;
 use App\Models\BlogPost;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class BlogPostController extends Controller
 {
@@ -20,8 +21,15 @@ class BlogPostController extends Controller
         
         // return the view
         // return a rendered Inertia response
-        return view('blog.index', ['blogPosts' => $blogPosts]);
+        //return view('blog.index', ['blogPosts' => $blogPosts]);
 
+        return Inertia::render('Blogs/Index', [
+            'blogPosts' => $blogPosts,
+            
+        ]);
+
+
+        //return view('blog.index', ['blogPosts' => $blogPosts]);
     }
 
     /**
@@ -30,7 +38,7 @@ class BlogPostController extends Controller
     public function create()
     {
         // return the view
-       return view('blog.create');
+        return Inertia::render('Blogs/Create');
     }
 
     /**
@@ -40,14 +48,14 @@ class BlogPostController extends Controller
     {
         //dd(auth()->user()->id);
         // store the blog post
-        $newPost = BlogPost::create([
+        BlogPost::create([
             'title' => $request->title,
             'content' => $request->content,
             'slug' => $request->slug,
             'user_id' => $request->user()->id,
             //'comment_id' => $request->comment_id,
         ]);
-        return redirect('blog/' . $newPost->id);
+        return redirect(route('blog.index'))->with('success', 'Blog post created.');
     }
 
     /**
@@ -58,13 +66,11 @@ class BlogPostController extends Controller
         // return the view
         //return $postId;
         $blogPost = BlogPost::find($postId);
-        $blogComments = BlogComments::where('blog_post_id', $postId->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        
-       //dd($blogComments);
-        return view('blog.show', ['blogPost' => $postId, 'blogComments' => $blogComments]);
-        
+        //dd($blogPost);
+        return Inertia::render('Blogs/Show', [
+            'blogPost' => $blogPost,
+            
+        ]);
     }
 
     /**
@@ -73,15 +79,17 @@ class BlogPostController extends Controller
     public function edit(BlogPost $postId)
     {
         // return the view
-        //$blogPost = BlogPost::find($editPost);
-        //dd($postId);
-        return view('blog.edit', ['blogPost' => $postId]);
+        $blogPost = BlogPost::find($postId);
+        return Inertia::render('Blogs/Edit', [
+            'blogPost' => $blogPost,
+            
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BlogPost $postId)
+    public function update(Request $request, BlogPost $postId): RedirectResponse
     {
         // log to the console
         //dd($blogPost);
@@ -92,7 +100,7 @@ class BlogPostController extends Controller
             'slug' => $request->slug,
             //'comment_id' => $request->comment_id,
         ]);
-        return redirect('blog/');
+        return redirect(route('blog.index'))->with('success', 'Blog post updated.');
     }
 
     /**
@@ -100,9 +108,9 @@ class BlogPostController extends Controller
      */
     public function destroy(BlogPost $postId)
     {
-        //dd($blogPost);
+        dd($postId);
         // destroy post
         $postId->delete();
-        return redirect('blog/');
+        return redirect(route('blog.index'))->with('success', 'Blog post deleted.');
     }
 }

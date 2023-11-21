@@ -31,7 +31,7 @@ export default function Edit({ auth, blogPost }) {
                         <h1 className="mb-8 text-3xl font-bold">Edit Blog Post</h1>
                         <form onSubmit={submit}>
                             <div className="mb-4">
-                                <label htmlFor="title" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                                <label htmlFor="title" className="block mb-2 text-sm text-gray-600">
                                     Title
                                 </label>
                                 <input
@@ -51,7 +51,7 @@ export default function Edit({ auth, blogPost }) {
                             </div>
             
                             <div className="mb-4">
-                                <label htmlFor="content" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                                <label htmlFor="content" className="block mb-2 text-sm text-gray-600">
                                     Content
                                 </label>
                                 <textarea
@@ -70,7 +70,7 @@ export default function Edit({ auth, blogPost }) {
                                 <InputError error={errors.content} />
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="slug" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                                <label htmlFor="slug" className="block mb-2 text-sm text-gray-600">
                                     Unique URL
                                 </label>
                                 <textarea

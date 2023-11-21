@@ -28,7 +28,7 @@ export default function Create({ auth }) {
                             
                             
                             <div className="mb-4">
-                                <label htmlFor="title" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                                <label htmlFor="title" className="block mb-2 text-sm text-gray-600">
                                     Title
                                 </label>
                                 <input
@@ -48,7 +48,7 @@ export default function Create({ auth }) {
                             </div>
             
                             <div className="mb-4">
-                                <label htmlFor="content" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                                <label htmlFor="content" className="block mb-2 text-sm text-gray-600">
                                     Content
                                 </label>
                                 <textarea
@@ -67,7 +67,7 @@ export default function Create({ auth }) {
                                 <InputError error={errors.content} />
                             </div>
                             <div className="mb-4">
-                                <label htmlFor="slug" className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+                                <label htmlFor="slug" className="block mb-2 text-sm text-gray-600">
                                     Unique URL
                                 </label>
                                 <textarea
