@@ -14,7 +14,8 @@ export default function Index({ auth, blogPosts }) {
 
 
     return (
-        
+        <AuthenticatedLayout
+            user={auth.user}>
         <div>
             
             <h1 className="mb-8 text-3xl font-bold">Blogs</h1>
@@ -54,5 +55,6 @@ export default function Index({ auth, blogPosts }) {
 
        
             </div>
+            </AuthenticatedLayout>
     );
 }

@@ -9,6 +9,8 @@ export default function Show({ auth, blogPost }) {
 
 
     return (
+        <AuthenticatedLayout
+            user={auth.user}>
         
         <div>
             
@@ -26,5 +28,6 @@ export default function Show({ auth, blogPost }) {
                     );
                 })}
             </div>
+            </AuthenticatedLayout>
     );
 }
